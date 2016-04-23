@@ -1,0 +1,28 @@
+=== Configuration du plugin
+
+Il n'y a pas de page de configuration générale.
+
+En créant un équipement, il faut rentrer l'adresse de l'ampoule Playbulb et son type.
+
+A partir de là on a une commande envoi qui permet d'envoyer des ordres.
+
+Les commandes Playbulb sont constituées de 2 choses :
+
+- un code représentant l'ordre (couleur ou effets)
+
+- un code représentant la couleur/intensité (ou l'effet en mode effet)
+
+Dans le plugin, ces deux éléments correspondent au titre et message. La commande envoi est donc une commande de type message.
+
+En scénario il vous faudra envoyer les 2 informations. Le plus simple pour les trouver est d'utiliser le widget et de voir les valeurs envoyées dans les logs.
+
+Playbulb ne dispose pas de retour d'état.
+
+
+==== Utilisation en déporté
+
+Il est possible d'envoyer les commandes bluetooth a un déporté.
+
+Dans ce cas, il faut renseigner les paramètres de connexion SSH.
+
+Aucun Jeedom n'est nécessaire sur l'équipement distant.

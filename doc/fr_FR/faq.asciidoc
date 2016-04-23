@@ -1,0 +1,18 @@
+[panel,primary]
+.Est-ce que le plugin s'appuie sur des API tiers ?
+--
+Le plugin utilise le bluetooth pour lancer les commandes, Playbulb est cloudless.
+--
+
+[panel,primary]
+.Comment envoyer une commande en scénario ?
+--
+Il faut utiliser la commande fournit avec le plugin en envoyant :
+- titre = 0x0014, 0x0016, 0x0018 suivant le modèle et si on veut une couleur ou un effet
+- message = le code a envoyé pour la commande
+
+Le plus simple est d'utiliser le widget pour envoyer une valeur et de récupérer dans les logs playbulb
+
+Sinon, une référence sur les codes :
+https://github.com/Phhere/Playbulb
+--

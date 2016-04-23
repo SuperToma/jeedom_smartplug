@@ -1,0 +1,76 @@
+      <div class="eqLogic-widget eqLogic allowResize smartplug" style="height: #height#;width: #width#;background-color: #background_color#; padding : 0px; #style#" data-eqLogic_id="#id#" data-version="dashboard" >
+         <center><a href="#eqLink#" style="font-size : 1.3em;#hideEqLogicName#">#name_display#</a></center><br />
+      <style>
+      .not-first-row
+      {
+         position: relative;
+         top: -10px;
+      }
+      </style>
+<div class="row not-first-row"><center>
+<div class="cmd cmd-widget" data-type="action" data-subtype="color" data-cmd_id="color#cmdid#" align="center">
+    <input id="col#cmdid#" class="action_colorpicker_change form-control cursor" type="color" style="display: inline;width: 90px;" align="center">
+</div>
+</center></div>
+<div class="row not-first-row" style="display: inline; align: center;"  data-cmd_id="fixe#cmdid#"><center>
+  <a class="btn btn-black btn-sm action_colorpicker_off">   </a>
+<a class="btn btn-danger btn-sm action_colorpicker_red">   </a>
+<a class="btn btn-success btn-sm action_colorpicker_green">   </a>
+<a class="btn btn-primary btn-sm action_colorpicker_blue">   </a>
+</center></div>
+    <script>
+        $('.cmd[data-cmd_id=color#cmdid#] .action_colorpicker_change').value(('#af5f5f' != '') ? '#af5f5f'.substr(0,7) : '#000000');
+        $('.row[data-cmd_id=fixe#cmdid#] .action_colorpicker_off').on('click', function() {
+            $(".cmd[data-cmd_id=slider#cmdid#] .slider").bootstrapSlider('setValue', 0);
+            $('.cmd[data-cmd_id=color#cmdid#] .action_colorpicker_change').value('#000000');
+        });
+        $('.row[data-cmd_id=fixe#cmdid#] .action_colorpicker_red').on('click', function() {
+            $('.cmd[data-cmd_id=color#cmdid#] .action_colorpicker_change').value('#ff0000');
+        });
+        $('.row[data-cmd_id=fixe#cmdid#] .action_colorpicker_green').on('click', function() {
+            $('.cmd[data-cmd_id=color#cmdid#] .action_colorpicker_change').value('#00ff00');
+        });
+        $('.row[data-cmd_id=fixe#cmdid#] .action_colorpicker_blue').on('click', function() {
+            $('.cmd[data-cmd_id=color#cmdid#] .action_colorpicker_change').value('#0000ff');
+        });
+        $('.cmd[data-cmd_id=color#cmdid#] .action_colorpicker_change').on('change', function() {
+            color = $('#col#cmdid#').value();
+            slider = $('#sli#cmdid#').value();
+            if (slider == '100') {
+              slider = 'ff';
+            }
+            if (slider == '0') {
+              slider = '00';
+            }
+            jeedom.cmd.execute({id: '#cmdid#', value: {title: '#cmd#', message: slider+color.replace('#','')}});
+        });
+    </script>
+
+<div class="row">
+<center>
+<span class="cmd  cmd-widget" data-type="action" data-subtype="slider" data-cmd_id="slider#cmdid#"  align="center">
+    <div id="sli#cmdid#" class="slider" style="margin : 5px 10px 8px 10px;width: 80px;" value="50" align="center"></div>
+
+    <script>
+        $(".cmd[data-cmd_id=slider#cmdid#] .slider").bootstrapSlider({
+            min: ('0' == '') ? 0 : parseInt('0'),
+            max: ('100' == '') ? 100 : parseInt('100'),
+            value: ('50' == '') ? 0 : parseInt('50')
+        });
+        $(".cmd[data-cmd_id=slider#cmdid#] .slider.slider-horizontal").css('z-index',1);
+        $(".cmd[data-cmd_id=slider#cmdid#] .slider").on('slideStop', function (ev) {
+          color = $('#col#cmdid#').value();
+          slider = $('#sli#cmdid#').value();
+          if (slider == '100') {
+            slider = 'ff';
+          }
+          if (slider == '0') {
+            slider = '00';
+          }
+          jeedom.cmd.execute({id: '#cmdid#', value: {title: '#cmd#', message: slider+color.replace('#','')}});
+        });
+    </script>
+</span>
+</center>
+</div>
+</div>
