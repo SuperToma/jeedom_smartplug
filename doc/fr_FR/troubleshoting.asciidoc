@@ -3,7 +3,5 @@
 --
 Avec le plugin bluetooth ou la commande suivante :
 
-  sudo hciconfig
+  sudo hcitool lescan
 --
-
-

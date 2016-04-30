@@ -1,17 +1,5 @@
-=== Playbulb, ampoules RGB Bluetooth
+=== Awox Smartplug, prises Bluetooth
 
-Plugin permettant d'utiliser des ampoules Playbulb.
+Plugin permettant d'utiliser des prises Smartplug Awox.
 
-Les différents types Playbulb sont supportés (color, candle, garden)
-
-Actuellement seul le mode couleur est supporté.
-
-La commande envoyée est disponible dans les logs event et de l'application pour l'utiliser dans les scénarios.
-
-Pour se procurer des ampoules Playbulb :
-
- * http://s.click.aliexpress.com/e/y723nQn2B[Playbulb Candle]
-
- * http://s.click.aliexpress.com/e/II6A6YJu7[Playbulb Color]
-
- * http://s.click.aliexpress.com/e/2VZ7y3zfy[Playbulb Garden]
+Les Smartplug sont des prises Bluetooth de la marque Awox. Nul besoin d'autre chose qu'une connexion bluetooth pour commander la prise, y compris via un déporté.

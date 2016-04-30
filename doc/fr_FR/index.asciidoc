@@ -6,10 +6,6 @@ include::presentation.asciidoc[]
 include::configuration.asciidoc[]
 
 '''
-== Références du protocole
-include::reference.asciidoc[]
-
-'''
 == FAQ
 include::faq.asciidoc[]
 

@@ -35,120 +35,38 @@ class smartplug extends eqLogic {
 
   public function postSave() {
     $this->setLogicalId($this->getConfiguration('addr'));
-    $apcupsCmd = $this->getCmd(null, 'envoi');
-    if (!is_object($apcupsCmd)) {
-      log::add('smartplug', 'debug', 'Création de la commande d\'envoi');
+    $smartplugCmd = $this->getCmd(null, 'on');
+    if (!is_object($smartplugCmd)) {
+      log::add('smartplug', 'debug', 'Création de la commande on');
       $smartplugCmd = new smartplugCmd();
-      $smartplugCmd->setName(__('Envoi', __FILE__));
+      $smartplugCmd->setName(__('Allumer', __FILE__));
       $smartplugCmd->setEqLogic_id($this->id);
       $smartplugCmd->setEqType('smartplug');
-      $smartplugCmd->setLogicalId('envoi');
-      $smartplugCmd->setConfiguration('data', 'envoi');
+      $smartplugCmd->setLogicalId('on');
+      $smartplugCmd->setConfiguration('command', '0x2b');
+      $smartplugCmd->setConfiguration('argument', '0f06030001000005ffff');
       $smartplugCmd->setType('action');
-      $smartplugCmd->setSubType('message');
-      $smartplugCmd->setDisplay('generic_type','LIGHT_SETCOLOR');
+      $smartplugCmd->setSubType('other');
+      $smartplugCmd->save();
+    }
+    $smartplugCmd = $this->getCmd(null, 'off');
+    if (!is_object($smartplugCmd)) {
+      log::add('smartplug', 'debug', 'Création de la commande off');
+      $smartplugCmd = new smartplugCmd();
+      $smartplugCmd->setName(__('Eteindre', __FILE__));
+      $smartplugCmd->setEqLogic_id($this->id);
+      $smartplugCmd->setEqType('smartplug');
+      $smartplugCmd->setLogicalId('off');
+      $smartplugCmd->setConfiguration('command', '0x2b');
+      $smartplugCmd->setConfiguration('argument', '0f06030000000004ffff');
+      $smartplugCmd->setType('action');
+      $smartplugCmd->setSubType('other');
       $smartplugCmd->save();
     }
   }
 
-  public function sendWidget( $addr, $brightness, $color, $mode, $speed ) {
-    $elogic = self::byLogicalId($addr, 'smartplug');
-    $this->setConfiguration('command',$command);
-    $this->setConfiguration('argument',$arguments);
-    // transformer 100 en ff et 1-9 en 01-09
-    if ($white = '100') {
-      $white = 'ff';
-    }
-    $lenght = strlen($white);
-    if ($lenght = '1') {
-      $white = '0' . $white;
-    }
-    $white = $white;
-    $color = str_replace('#','',$color);
-    switch ($type) {
-      case 'candle' :
-      if ($mode = '00') {
-        $command = '0x0016';
-        $argument = $brightness . $color;
-      } else {
-        $command = '0x0014';
-        $argument = $brightness . $color . $effect . '00' . $speed . '00';
-      }
-      break;
-      case 'candle6' :
-      if ($mode = '00') {
-        $command = '0x0019';
-        $argument = $brightness . $color;
-      } else {
-        $command = '0x0017';
-        $argument = $brightness . $color . $effect . '00' . $speed . '00';
-      }
-      break;
-      case 'color' :
-      if ($mode = '00') {
-        $command = '0x0018';
-        $argument = $brightness . $color;
-      } else {
-        $command = '0x0016';
-        $argument = $brightness . $color . $effect . '00' . $speed;
-      }
-      break;
-      case 'rainbow' :
-      if ($mode = '00') {
-        $command = '0x0018';
-        $argument = $brightness . $color;
-      } else {
-        $command = '0x0016';
-        $argument = $brightness . $color . $effect . '00' . $speed;
-      }
-      break;
-      case 'garden' :
-      if ($mode = '00') {
-        $command = '0x001b';
-        $argument = $brightness . $color;
-      } else {
-        $command = '0x0019';
-        $argument = $brightness . $color . $effect . '00' . $speed;
-      }
-      break;
-      case 'bluelabel' :
-      if ($mode = '00') {
-        $command = '0x001b';
-        $argument = $brightness . $color;
-      } else {
-        $command = '0x0019';
-        $argument = $brightness . $color . $effect . '00' . $speed;
-      }
-      break;
-      case 'sphere' :
-      if ($mode = '00') {
-        $command = '0x001b';
-        $argument = $brightness . $color;
-      } else {
-        $command = '0x0019';
-        $argument = $brightness . $color . $effect . '00' . $speed;
-      }
-      break;
-      case 'original' :
-      if ($mode = '00') {
-        $command = '0x001b';
-        $argument = $brightness . $color;
-      } else {
-        $command = '0x0019';
-        $argument = $brightness . $color . $effect . '00' . $speed;
-      }
-      break;
-    }
-    $command = $cmd->setConfiguration('command', $command);
-    $argument = $cmd->setConfiguration('argument', $argument);
-    smartplug::sendCommand($eqLogic->getConfiguration('addr'));
-
-  }
-
-  public function sendCommand( $addr ) {
+  public function sendCommand( $addr, $command, $argument ) {
     $smartplug = self::byLogicalId($addr, 'smartplug');
-    $command = $smartplug->getConfiguration('command');
-    $argument = $smartplug->getConfiguration('argument');
     log::add('smartplug', 'info', 'Commande : gatttool -b ' . $addr . ' --char-write -a ' . $command . ' -n ' . $argument);
     if ($smartplug->getConfiguration('maitreesclave') == 'deporte'){
       $ip=$smartplug->getConfiguration('addressip');
@@ -180,88 +98,18 @@ class smartplug extends eqLogic {
 
 
 
-public function toHtml($_version = 'dashboard') {
-  $replace = $this->preToHtml($_version);
-  if (!is_array($replace)) {
-    return $replace;
-  }
-  $version = jeedom::versionAlias($_version);
-  if ($this->getDisplay('hideOn' . $version) == 1) {
-    return '';
-  }
-
-  foreach ($this->getCmd('info') as $cmd) {
-    $replace['#' . $cmd->getLogicalId() . '_history#'] = '';
-    $replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
-    $replace['#' . $cmd->getLogicalId() . '#'] = $cmd->execCmd();
-    $replace['#' . $cmd->getLogicalId() . '_collect#'] = $cmd->getCollectDate();
-    if ($cmd->getIsHistorized() == 1) {
-      $replace['#' . $cmd->getLogicalId() . '_history#'] = 'history cursor';
-    }
-  }
-
-$type = $this->getConfiguration('type');
-switch ($type) {
-  case 'candle' :
-    $replace['#cmd#'] = '0x0016';
-    break;
-  case 'candle6' :
-    $replace['#cmd#'] = '0x0019';
-    break;
-  case 'color' :
-    $replace['#cmd#'] = '0x0018';
-    break;
-  case 'rainbow' :
-    $replace['#cmd#'] = '0x0018';
-    break;
-  case 'garden' :
-    $replace['#cmd#'] = '0x001b';
-    break;
-  case 'bluelabel' :
-    $replace['#cmd#'] = '0x001b';
-    break;
-  case 'sphere' :
-    $replace['#cmd#'] = '0x001b';
-    break;
-  case 'original' :
-    $replace['#cmd#'] = '0x0010';
-    break;
-  }
-
-$cmdlogic = smartplugCmd::byEqLogicIdAndLogicalId($this->getId(),'envoi');
-$replace['#cmdid#'] = $cmdlogic->getId();
-
-if ($type == 'original') {
-       return template_replace($replace, getTemplate('core', jeedom::versionAlias($_version), 'smartplug_nocolor', 'smartplug'));
-} else {
-       return template_replace($replace, getTemplate('core', jeedom::versionAlias($_version), 'smartplug', 'smartplug'));
-}}
-
 }
 
 class smartplugCmd extends cmd {
-  /*     * *************************Attributs****************************** */
 
-
-
-  /*     * ***********************Methode static*************************** */
-
-  /*     * *********************Methode d'instance************************* */
   public function execute($_options = null) {
-    log::add('smartplug', 'info', 'Commande recue : ' . $_options['title'] . ' ' . $_options['message']);
 
     switch ($this->getType()) {
-
+      case 'info' :
+        return $this->getConfiguration('value');
       case 'action' :
         $eqLogic = $this->getEqLogic();
-        //log::add('smartplug', 'debug', print_r($eqLogic,true));
-
-        $eqLogic->setConfiguration('command',$_options['title']);
-        $eqLogic->setConfiguration('argument',$_options['message']);
-        $eqLogic->save();
-        //log::add('smartplug', 'debug', print_r($eqLogic,true));
-
-        smartplug::sendCommand($eqLogic->getConfiguration('addr'));
+        smartplug::sendCommand($eqLogic->getConfiguration('addr'),$this->getConfiguration('command'),$this->getConfiguration('argument'));
         return true;
     }
 

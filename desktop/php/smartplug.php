@@ -24,7 +24,7 @@ $eqLogics = eqLogic::byType('smartplug');
     </div>
 
     <div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
-        <legend><i class="fa fa-table"></i>  {{Mes lampes Awox BT}}
+        <legend><i class="fa fa-table"></i>  {{Mes SmartPlug Awox}}
         </legend>
 		<div class="eqLogicThumbnailContainer">
           <div class="cursor eqLogicAction" data-action="add" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
@@ -126,21 +126,6 @@ $eqLogics = eqLogic::byType('smartplug');
                     		<label class="col-md-2 control-label">{{Adresse smartplug}}</label>
                     		<div class="col-md-3">
                     		 <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="addr" placeholder="adresse bluetooth"/>
-                    		</div>
-                	</div>
-                	<div class="form-group">
-                    		<label class="col-md-2 control-label">{{Type smartplug}}</label>
-                    		<div class="col-md-3">
-								<select class="form-control eqLogicAttr" data-l1key="configuration" data-l2key="type">
-									<option value="candle">Candle v5-</option>
-                  <option value="candle6">Candle v6+</option>
-									<option value="rainbow">Rainbow</option>
-									<option value="color">Color</option>
-                  <option value="bluelabel">Blue Label</option>
-                  <option value="garden">Garden</option>
-                  <option value="sphere">Sphere</option>
-                  <option value="original">Original</option>
-								</select>
                     		</div>
                 	</div>
 
