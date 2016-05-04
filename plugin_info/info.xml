@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <info>
     <id>smartplug</id>
-    <name>Awox SmartPlug</name>
+    <name>Awox SmartPlug BT</name>
     <licence>AGPL</licence>
     <author>lunarok</author>
     <require>2.2.4</require>
