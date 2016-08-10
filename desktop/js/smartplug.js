@@ -27,11 +27,15 @@ function addCmdToTable(_cmd) {
         tr += '<span class="cmdAttr" data-l1key="name"></span>';
         tr += '</td><td>';
         tr += '<span class="cmdAttr" data-l1key="subType"></span>';
+        if (is_numeric(_cmd.id)) {
+            tr += '<a class="btn btn-default btn-xs cmdAction expertModeVisible" data-action="configure"><i class="fa fa-cogs"></i></a> ';
+            tr += '<a class="btn btn-default btn-xs cmdAction" data-action="test"><i class="fa fa-rss"></i> {{Tester}}</a>';
+        }
         tr += '</td>';
         tr += '</tr>';
 
     $('#table_cmd tbody').append(tr);
     $('#table_cmd tbody tr:last').setValues(_cmd, '.cmdAttr');
     jeedom.cmd.changeType($('#table_cmd tbody tr:last'), init(_cmd.subType));
-        
+
 }
