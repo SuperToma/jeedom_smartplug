@@ -120,16 +120,6 @@ $eqLogics = eqLogic::byType('smartplug');
               </div>
             </div>
 
-          </fieldset>
-
-        </form>
-      </div>
-
-      <div id="infoNode" class="col-sm-6">
-        <form class="form-horizontal">
-          <fieldset>
-            <legend><i class="fa fa-info-circle"></i>  {{Configuration}}</legend>
-
             <div class="form-group">
               <label class="col-sm-3 control-label">{{Adresse smartplug}}</label>
               <div class="col-sm-3">
