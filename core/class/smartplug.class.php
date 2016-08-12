@@ -23,6 +23,12 @@ class smartplug extends eqLogic {
 
   public static $_widgetPossibility = array('custom' => true);
 
+  public function cron() {
+    foreach (eqLogic::byType('smartplug', true) as $smartplug) {
+      $smartplug->readConso($smartplug->getConfiguration('addr'));
+    }
+  }
+
   public function preUpdate() {
     if ($this->getConfiguration('addr') == '') {
       throw new Exception(__('L\adresse ne peut etre vide',__FILE__));
@@ -63,6 +69,7 @@ class smartplug extends eqLogic {
       $smartplugCmd->setSubType('numeric');
       $smartplugCmd->save();
     }
+    $this->readConso($this->getConfiguration('addr'));
     $smartplugCmd = $this->getCmd(null, 'on');
     if (!is_object($smartplugCmd)) {
       log::add('smartplug', 'debug', 'Création de la commande on');
