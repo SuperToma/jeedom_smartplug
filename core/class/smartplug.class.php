@@ -35,6 +35,34 @@ class smartplug extends eqLogic {
 
   public function postSave() {
     $this->setLogicalId($this->getConfiguration('addr'));
+    $smartplugCmd = $this->getCmd(null, 'status');
+    if (!is_object($smartplugCmd)) {
+      log::add('smartplug', 'debug', 'Création de la commande status');
+      $smartplugCmd = new smartplugCmd();
+      $smartplugCmd->setName(__('Statut', __FILE__));
+      $smartplugCmd->setEqLogic_id($this->id);
+      $smartplugCmd->setEqType('smartplug');
+      $smartplugCmd->setLogicalId('status');
+      $smartplugCmd->setConfiguration('command', '0x2b');
+      $smartplugCmd->setConfiguration('argument', '0f06030000000004ffff');
+      $smartplugCmd->setType('info');
+      $smartplugCmd->setSubType('binary');
+      $smartplugCmd->save();
+    }
+    $smartplugCmd = $this->getCmd(null, 'conso');
+    if (!is_object($smartplugCmd)) {
+      log::add('smartplug', 'debug', 'Création de la commande conso');
+      $smartplugCmd = new smartplugCmd();
+      $smartplugCmd->setName(__('Conso', __FILE__));
+      $smartplugCmd->setEqLogic_id($this->id);
+      $smartplugCmd->setEqType('smartplug');
+      $smartplugCmd->setLogicalId('conso');
+      $smartplugCmd->setConfiguration('command', '0x2b');
+      $smartplugCmd->setConfiguration('argument', '0f06030000000004ffff');
+      $smartplugCmd->setType('info');
+      $smartplugCmd->setSubType('numeric');
+      $smartplugCmd->save();
+    }
     $smartplugCmd = $this->getCmd(null, 'on');
     if (!is_object($smartplugCmd)) {
       log::add('smartplug', 'debug', 'Création de la commande on');
@@ -94,6 +122,45 @@ class smartplug extends eqLogic {
       exec('sudo hciconfig hciO up');
       exec('sudo gatttool -b ' . $addr . ' --char-write -a ' . $command . ' -n ' . $argument);
     }
+  }
+
+  public function readConso( $addr ) {
+    $smartplug = self::byLogicalId($addr, 'smartplug');
+    log::add('smartplug', 'info', 'Commande : gatttool -b ' . $addr . ' --handle=0x002b --char-write-req --value=0f050400000005ffff --listen');
+    if ($smartplug->getConfiguration('maitreesclave') == 'deporte'){
+      $ip=$smartplug->getConfiguration('addressip');
+      $port=$smartplug->getConfiguration('portssh');
+      $user=$smartplug->getConfiguration('user');
+      $pass=$smartplug->getConfiguration('password');
+      if (!$connection = ssh2_connect($ip,$port)) {
+        log::add('smartplug', 'error', 'connexion SSH KO');
+      }else{
+        if (!ssh2_auth_password($connection,$user,$pass)){
+          log::add('smartplug', 'error', 'Authentification SSH KO');
+        }else{
+          log::add('smartplug', 'debug', 'Commande par SSH');
+          $hcion = ssh2_exec($connection, 'sudo hciconfig hciO up');
+          $result = ssh2_exec($connection, 'sudo gatttool -b ' . $addr . ' --handle=0x002b --char-write-req --value=0f050400000005ffff --listen');
+          stream_set_blocking($result, true);
+          $result = stream_get_contents($result);
+
+          $closesession = ssh2_exec($connection, 'exit');
+          stream_set_blocking($closesession, true);
+          stream_get_contents($closesession);
+        }
+      }
+    }else {
+      exec('sudo hciconfig hciO up');
+      exec('sudo gatttool -b ' . $addr . ' --handle=0x002b --char-write-req --value=0f050400000005ffff --listen', $result, $return_var);
+    }
+    $result = explode('0f 0f 04 00 01 00 00 ', $result );
+    $result = substr($result[1], 0, 5);
+    $result = hexdec($result);
+    $result = $result/1000;
+    $smartplugCmd = $this->getCmd(null, 'conso');
+    $smartplugCmd->setConfiguration('value',$result);
+    $smartplugCmd->save();
+    $smartplugCmd->event($result);
   }
 
 
