@@ -72,7 +72,7 @@ class smartplug extends eqLogic {
       $smartplugCmd->setSubType('numeric');
       $smartplugCmd->save();
     }
-    $this->readConso($this->getConfiguration('addr'));
+    $this->readStatus($this->getConfiguration('addr'));
     $smartplugCmd = $this->getCmd(null, 'on');
     if (!is_object($smartplugCmd)) {
       log::add('smartplug', 'debug', 'Création de la commande on');
@@ -140,7 +140,7 @@ class smartplug extends eqLogic {
     }
   }
 
-  public function readConso( $addr ) {
+  public function readStatus( $addr ) {
     $smartplug = self::byLogicalId($addr, 'smartplug');
     log::add('smartplug', 'info', 'Commande : gatttool -b ' . $addr . ' --handle=0x002b --char-write-req --value=0f050400000005ffff --listen');
     if ($smartplug->getConfiguration('maitreesclave') == 'deporte'){
@@ -169,7 +169,9 @@ class smartplug extends eqLogic {
       exec('sudo hciconfig hciO up');
       exec('sudo gatttool -b ' . $addr . ' --handle=0x002b --char-write-req --value=0f050400000005ffff --listen', $result, $return_var);
     }
-    $result = explode('0f 0f 04 00 01 00 00 ', $result );
+    $result = explode('0f 0f 04 00 0', $result );
+    $status = substr($result[1], 0, 1);
+    $result = explode(' 00 00 ', $result[1] );
     $result = substr($result[1], 0, 5);
     $result = hexdec($result);
     $result = $result/1000;
@@ -177,6 +179,10 @@ class smartplug extends eqLogic {
     $smartplugCmd->setConfiguration('value',$result);
     $smartplugCmd->save();
     $smartplugCmd->event($result);
+    $smartplugCmd = $this->getCmd(null, 'status');
+    $smartplugCmd->setConfiguration('value',$status);
+    $smartplugCmd->save();
+    $smartplugCmd->event($status);
   }
 
 
