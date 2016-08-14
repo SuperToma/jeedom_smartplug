@@ -169,10 +169,9 @@ class smartplug extends eqLogic {
       exec('sudo hciconfig hciO up');
       exec('sudo gatttool -b ' . $addr . ' --handle=0x002b --char-write-req --value=0f050400000005ffff --listen', $result, $return_var);
     }
-    $result = explode('0f 0f 04 00 0', $result );
-    $status = substr($result[1], 0, 1);
-    $result = explode(' 00 00 ', $result[1] );
-    $result = substr($result[1], 0, 5);
+    $result = explode(' ', $result );
+    $status = substr($result[4], 0, 1);
+    $result = $result[6] + $result[7] + $result[8] + $result[9];
     $result = hexdec($result);
     $result = $result/1000;
     $smartplugCmd = $this->getCmd(null, 'conso');
