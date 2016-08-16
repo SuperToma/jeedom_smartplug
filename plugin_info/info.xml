@@ -5,5 +5,5 @@
     <licence>AGPL</licence>
     <author>lunarok</author>
     <require>2.3.17</require>
-    <category>https://github.com/lunarok/jeedom_smartplug/blob/master/plugin_info/info.xml</category>
+    <category>devicecommunication</category>
 </info>
