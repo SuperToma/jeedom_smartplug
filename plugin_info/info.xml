@@ -4,6 +4,6 @@
     <name>Awox SmartPlug BT</name>
     <licence>AGPL</licence>
     <author>lunarok</author>
-    <require>2.2.4</require>
-    <category>communication</category>
+    <require>2.3.17</require>
+    <category>https://github.com/lunarok/jeedom_smartplug/blob/master/plugin_info/info.xml</category>
 </info>
