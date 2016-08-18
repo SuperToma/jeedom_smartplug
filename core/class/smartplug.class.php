@@ -25,7 +25,7 @@ class smartplug extends eqLogic {
 
   public function cron() {
     foreach (eqLogic::byType('smartplug', true) as $smartplug) {
-      $smartplug->readConso($smartplug->getConfiguration('addr'));
+      $smartplug->readStatus($smartplug->getConfiguration('addr'));
     }
   }
 
