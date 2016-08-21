@@ -249,6 +249,7 @@ class smartplugCmd extends cmd
             case 'action' :
                 $eqLogic = $this->getEqLogic();
                 smartplug::sendCommand($eqLogic->getConfiguration('addr'), $this->getConfiguration('command'), $this->getConfiguration('argument'));
+                $eqLogic->readStatus();
                 return true;
         }
 
