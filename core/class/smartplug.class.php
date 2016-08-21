@@ -84,7 +84,7 @@ class smartplug extends eqLogic
             $smartplugCmd->setIsHistorized(1);
             $smartplugCmd->save();
         }
-        $this->readStatus($this->getConfiguration('addr'));
+
         $smartplugCmd = $this->getCmd(null, 'on');
         if (!is_object($smartplugCmd)) {
             log::add('smartplug', 'debug', 'Création de la commande on');
@@ -121,6 +121,7 @@ class smartplug extends eqLogic
             $smartplugCmd->setIsVisible(0);
             $smartplugCmd->save();
         }
+        $this->readStatus($this->getConfiguration('addr'));
     }
 
     /**
