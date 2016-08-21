@@ -180,7 +180,11 @@ class smartplug extends eqLogic
                     $hcion = ssh2_exec($connection, 'sudo hciconfig hciO up');
                     $cmd = ssh2_exec($connection, 'sudo timeout -s INT 2 gatttool -b ' . $addr . $cmdSuffix);
                     stream_set_blocking($cmd, true);
-                    $result = stream_get_contents($cmd);
+                    $cmd = stream_get_contents($cmd);
+                    if (strstr($result[1], 'Notification handle = 0x002e value') !== false) {
+                      $result[0] = 'Characteristic value was written successfully';
+                      $result[1] = $cmd;
+                    }
 
                     $closesession = ssh2_exec($connection, 'exit');
                     stream_set_blocking($closesession, true);
