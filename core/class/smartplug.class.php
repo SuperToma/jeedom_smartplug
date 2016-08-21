@@ -61,10 +61,10 @@ class smartplug extends eqLogic
             $smartplugCmd->setConfiguration('argument', '0f06030000000004ffff');
             $smartplugCmd->setType('info');
             $smartplugCmd->setSubType('binary');
-            $smartplugCmd->setTemplate("dashboard", "light");
-            $smartplugCmd->setTemplate("mobile", "light");
-            $smartplugCmd->save();
         }
+        $smartplugCmd->setTemplate("dashboard", "light");
+        $smartplugCmd->setTemplate("mobile", "light");
+        $smartplugCmd->save();
         $cmId = $smartplugCmd->getId();
         $smartplugCmd = $this->getCmd(null, 'conso');
         if (!is_object($smartplugCmd)) {
@@ -93,11 +93,11 @@ class smartplug extends eqLogic
             $smartplugCmd->setConfiguration('argument', '0f06030001000005ffff');
             $smartplugCmd->setType('action');
             $smartplugCmd->setSubType('other');
-            $smartplugCmd->setValue($cmId);
-            $smartplugCmd->setTemplate("dashboard", "light");
-            $smartplugCmd->setTemplate("mobile", "light");
-            $smartplugCmd->save();
         }
+        $smartplugCmd->setValue($cmId);
+        $smartplugCmd->setTemplate("dashboard", "light");
+        $smartplugCmd->setTemplate("mobile", "light");
+        $smartplugCmd->save();
         $smartplugCmd = $this->getCmd(null, 'off');
         if (!is_object($smartplugCmd)) {
             log::add('smartplug', 'debug', 'Création de la commande off');
@@ -110,11 +110,11 @@ class smartplug extends eqLogic
             $smartplugCmd->setConfiguration('argument', '0f06030000000004ffff');
             $smartplugCmd->setType('action');
             $smartplugCmd->setSubType('other');
-            $smartplugCmd->setValue($cmId);
-            $smartplugCmd->setTemplate("dashboard", "light");
-            $smartplugCmd->setTemplate("mobile", "light");
-            $smartplugCmd->save();
         }
+        $smartplugCmd->setValue($cmId);
+        $smartplugCmd->setTemplate("dashboard", "light");
+        $smartplugCmd->setTemplate("mobile", "light");
+        $smartplugCmd->save();
     }
 
     /**
