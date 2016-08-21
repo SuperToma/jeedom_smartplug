@@ -98,9 +98,6 @@ class smartplug extends eqLogic
             $smartplugCmd->setType('action');
             $smartplugCmd->setSubType('other');
             $smartplugCmd->setValue($cmId);
-            $smartplugCmd->setTemplate("dashboard", "light");
-            $smartplugCmd->setTemplate("mobile", "light");
-            $smartplugCmd->setIsVisible(0);
             $smartplugCmd->save();
         }
         $smartplugCmd = $this->getCmd(null, 'off');
@@ -116,12 +113,8 @@ class smartplug extends eqLogic
             $smartplugCmd->setType('action');
             $smartplugCmd->setSubType('other');
             $smartplugCmd->setValue($cmId);
-            $smartplugCmd->setTemplate("dashboard", "light");
-            $smartplugCmd->setTemplate("mobile", "light");
-            $smartplugCmd->setIsVisible(0);
             $smartplugCmd->save();
         }
-        $this->readStatus($this->getConfiguration('addr'));
     }
 
     /**
