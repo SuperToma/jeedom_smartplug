@@ -4,7 +4,7 @@ Il n'y a pas de page de configuration générale.
 
 En créant un équipement, il faut rentrer l'adresse bluetooth de l'équipement.
 
-A partir de là on a deux commandes on/off qui permettent d'activer le relais.
+A partir de là on a deux commandes on/off qui permettent d'activer le relais et deux informations pour le statut et la consommation
 
 
 ==== Utilisation en déporté

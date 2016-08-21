@@ -1,7 +1,0 @@
-[panel,danger]
-.Comment trouver l'adresse bluetooth de mon playbulb ?
---
-Avec le plugin bluetooth ou la commande suivante :
-
-  sudo hcitool lescan
---
