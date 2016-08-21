@@ -192,7 +192,7 @@ class smartplug extends eqLogic
             exec('sudo timeout -s INT 2 gatttool -b ' . $addr . $cmdSuffix, $result, $return_var);
         }
 
-        log::add('smartplug', 'info', 'Commande ' . $cmdUniqId . ' result : [' . implode("]  [", $result) . ']');
+        log::add('smartplug', 'info', 'Commande ' . $cmdUniqId . ' result : [' . implode("]  [", $result[1]) . ']');
 
         $status = $power = 0;
 
@@ -250,4 +250,3 @@ class smartplugCmd extends cmd
 
     }
 }
-
