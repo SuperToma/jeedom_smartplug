@@ -61,10 +61,11 @@ class smartplug extends eqLogic
             $smartplugCmd->setConfiguration('argument', '0f06030000000004ffff');
             $smartplugCmd->setType('info');
             $smartplugCmd->setSubType('binary');
+            $smartplugCmd->setTemplate("dashboard", "light");
+            $smartplugCmd->setTemplate("mobile", "light");
+            $smartplugCmd->setIsHistorized(1);
+            $smartplugCmd->save();
         }
-        $smartplugCmd->setTemplate("dashboard", "light");
-        $smartplugCmd->setTemplate("mobile", "light");
-        $smartplugCmd->save();
         $cmId = $smartplugCmd->getId();
         $smartplugCmd = $this->getCmd(null, 'conso');
         if (!is_object($smartplugCmd)) {
@@ -78,6 +79,9 @@ class smartplug extends eqLogic
             $smartplugCmd->setConfiguration('argument', '0f06030000000004ffff');
             $smartplugCmd->setType('info');
             $smartplugCmd->setSubType('numeric');
+            $smartplugCmd->setTemplate("dashboard", "badge");
+            $smartplugCmd->setTemplate("mobile", "badge");
+            $smartplugCmd->setIsHistorized(1);
             $smartplugCmd->save();
         }
         $this->readStatus($this->getConfiguration('addr'));
@@ -93,11 +97,12 @@ class smartplug extends eqLogic
             $smartplugCmd->setConfiguration('argument', '0f06030001000005ffff');
             $smartplugCmd->setType('action');
             $smartplugCmd->setSubType('other');
+            $smartplugCmd->setValue($cmId);
+            $smartplugCmd->setTemplate("dashboard", "light");
+            $smartplugCmd->setTemplate("mobile", "light");
+            $smartplugCmd->setIsVisible(0);
+            $smartplugCmd->save();
         }
-        $smartplugCmd->setValue($cmId);
-        $smartplugCmd->setTemplate("dashboard", "light");
-        $smartplugCmd->setTemplate("mobile", "light");
-        $smartplugCmd->save();
         $smartplugCmd = $this->getCmd(null, 'off');
         if (!is_object($smartplugCmd)) {
             log::add('smartplug', 'debug', 'Création de la commande off');
@@ -110,11 +115,12 @@ class smartplug extends eqLogic
             $smartplugCmd->setConfiguration('argument', '0f06030000000004ffff');
             $smartplugCmd->setType('action');
             $smartplugCmd->setSubType('other');
+            $smartplugCmd->setValue($cmId);
+            $smartplugCmd->setTemplate("dashboard", "light");
+            $smartplugCmd->setTemplate("mobile", "light");
+            $smartplugCmd->setIsVisible(0);
+            $smartplugCmd->save();
         }
-        $smartplugCmd->setValue($cmId);
-        $smartplugCmd->setTemplate("dashboard", "light");
-        $smartplugCmd->setTemplate("mobile", "light");
-        $smartplugCmd->save();
     }
 
     /**
