@@ -178,9 +178,9 @@ class smartplug extends eqLogic
                 } else {
                     log::add('smartplug', 'debug', 'Commande par SSH');
                     $hcion = ssh2_exec($connection, 'sudo hciconfig hciO up');
-                    $result = ssh2_exec($connection, 'sudo timeout -s INT 2 gatttool -b ' . $addr . $cmdSuffix);
-                    stream_set_blocking($result, true);
-                    $result = stream_get_contents($result);
+                    $cmd = ssh2_exec($connection, 'sudo timeout -s INT 2 gatttool -b ' . $addr . $cmdSuffix);
+                    stream_set_blocking($cmd, true);
+                    $result = stream_get_contents($cmd);
 
                     $closesession = ssh2_exec($connection, 'exit');
                     stream_set_blocking($closesession, true);
@@ -192,7 +192,7 @@ class smartplug extends eqLogic
             exec('sudo timeout -s INT 2 gatttool -b ' . $addr . $cmdSuffix, $result, $return_var);
         }
 
-        //log::add('smartplug', 'info', 'Commande ' . $cmdUniqId . ' result : [' . implode("]  [", $result[1]) . ']');
+        log::add('smartplug', 'info', 'Commande ' . $cmdUniqId . ' result : [' . implode("]  [", $result) . ']');
 
         $status = $power = 0;
 
