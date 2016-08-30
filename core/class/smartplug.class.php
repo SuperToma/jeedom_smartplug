@@ -19,9 +19,6 @@
 /* * ***************************Includes********************************* */
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 
-/**
- * Class smartplug
- */
 class smartplug extends eqLogic
 {
 
@@ -125,6 +122,7 @@ class smartplug extends eqLogic
     public function sendCommand($addr, $command, $argument)
     {
         $smartplug = self::byLogicalId($addr, 'smartplug');
+        $port = str_replace('hci', '', jeedom::getBluetoothMapping(config::byKey('port', 'smartplug',0)));
         log::add('smartplug', 'info', 'Commande : gatttool -b ' . $addr . ' --char-write -a ' . $command . ' -n ' . $argument);
         if ($smartplug->getConfiguration('maitreesclave') == 'deporte') {
             $ip = $smartplug->getConfiguration('addressip');
