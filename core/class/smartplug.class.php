@@ -199,6 +199,7 @@ class smartplug extends eqLogic
         $status = $power = 0;
 
         if (isset($result[0], $result[1]) &&
+            if(is_array($result)) $result = array_slice($result, -2);
             $result[0] == 'Characteristic value was written successfully' &&
             strstr($result[1], 'Notification handle = 0x002e value') !== false
         ) {
@@ -247,7 +248,7 @@ class smartplugCmd extends cmd
             case 'action' :
                 $eqLogic = $this->getEqLogic();
                 smartplug::sendCommand($eqLogic->getConfiguration('addr'), $this->getConfiguration('command'), $this->getConfiguration('argument'));
-                $eqLogic->readStatus();
+                $eqLogic->readStatus($eqLogic->getConfiguration('addr'));
                 return true;
         }
 
