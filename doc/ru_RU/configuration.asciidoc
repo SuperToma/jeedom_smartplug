@@ -1,0 +1,16 @@
+=== Configuration du plugin
+
+Il n'y a pas de page de configuration générale.
+
+En créant un équipement, il faut rentrer l'adresse bluetooth de l'équipement.
+
+A partir de là on a deux commandes on/off qui permettent d'activer le relais et deux informations pour le statut et la consommation
+
+
+==== Utilisation en déporté
+
+Il est possible d'envoyer les commandes bluetooth a un déporté.
+
+Dans ce cas, il faut renseigner les paramètres de connexion SSH.
+
+Aucun Jeedom n'est nécessaire sur l'équipement distant.

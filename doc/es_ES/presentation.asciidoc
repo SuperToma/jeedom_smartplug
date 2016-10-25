@@ -1,0 +1,5 @@
+=== Awox Smartplug, prises Bluetooth
+
+Plugin permettant d'utiliser des prises Smartplug Awox.
+
+Les Smartplug sont des prises Bluetooth de la marque Awox. Nul besoin d'autre chose qu'une connexion bluetooth pour commander la prise, y compris via un déporté.
