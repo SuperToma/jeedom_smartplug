@@ -1,0 +1,49 @@
+{
+    "plugins\/smartplug\/plugin_info\/configuration.php": {
+        "Port clef bluetooth": "Port clef bluetooth",
+        "Aucun": "Aucun"
+    },
+    "plugins\/smartplug\/desktop\/php\/smartplug.php": {
+        "Ajouter un équipement": "Ajouter un équipement",
+        "Rechercher": "Rechercher",
+        "Mes SmartPlug Awox": "Mes SmartPlug Awox",
+        "Sauvegarder": "Sauvegarder",
+        "Supprimer": "Supprimer",
+        "Configuration avancée": "Configuration avancée",
+        "Equipement": "Equipement",
+        "Commandes": "Commandes",
+        "Ampoule smartplug": "Ampoule smartplug",
+        "Nom de l'équipement smartplug": "Nom de l'équipement smartplug",
+        "Objet parent": "Objet parent",
+        "Aucun": "Aucun",
+        "Catégorie": "Catégorie",
+        "Activer": "Activer",
+        "Visible": "Visible",
+        "Commentaire": "Commentaire",
+        "Adresse smartplug": "Adresse smartplug",
+        "Equipement local ou déporté ?": "Equipement local ou déporté ?",
+        "Local": "Local",
+        "Déporté": "Déporté",
+        "Adresse IP": "Adresse IP",
+        "saisir l'adresse IP": "saisir l'adresse IP",
+        "Port SSH": "Port SSH",
+        "saisir le port SSH": "saisir le port SSH",
+        "Identifiant": "Identifiant",
+        "saisir le login": "saisir le login",
+        "Mot de passe": "Mot de passe",
+        "saisir le password": "saisir le password",
+        "Nom": "Nom",
+        "Options": "Options"
+    },
+    "plugins\/smartplug\/desktop\/js\/smartplug.js": {
+        "Afficher": "Afficher",
+        "Historiser": "Historiser",
+        "Tester": "Tester"
+    },
+    "plugins\/smartplug\/core\/class\/smartplug.class.php": {
+        "Statut": "Statut",
+        "Conso": "Conso",
+        "Allumer": "Allumer",
+        "Eteindre": "Eteindre"
+    }
+}
