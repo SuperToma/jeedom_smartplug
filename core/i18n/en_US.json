@@ -1,15 +1,15 @@
 {
     "plugins\/smartplug\/plugin_info\/configuration.php": {
-        "Port clef bluetooth": "Port clef bluetooth",
-        "Aucun": "Aucun"
+        "Port clef bluetooth": "Bluetooth key port",
+        "Aucun": "None"
     },
     "plugins\/smartplug\/desktop\/php\/smartplug.php": {
-        "Ajouter un équipement": "Ajouter un équipement",
-        "Rechercher": "Rechercher",
+        "Ajouter un équipement": "Add an equipment",
+        "Rechercher": "Search",
         "Mes SmartPlug Awox": "Mes SmartPlug Awox",
-        "Sauvegarder": "Sauvegarder",
-        "Supprimer": "Supprimer",
-        "Configuration avancée": "Configuration avancée",
+        "Sauvegarder": "Save",
+        "Supprimer": "Delete",
+        "Configuration avancée": "Adanced Settings",
         "Equipement": "Equipement",
         "Commandes": "Commandes",
         "Ampoule smartplug": "Ampoule smartplug",

@@ -1,4 +1,4 @@
-=== Awox Smartplug, prises Bluetooth
+=== Awox Smartplug, Bluetooth plugs
 
 Plugin permettant d'utiliser des prises Smartplug Awox.
 
