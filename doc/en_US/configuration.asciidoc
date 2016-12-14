@@ -1,6 +1,6 @@
 === The plugin configuration
 
-Il n'y a pas de page de configuration générale.
+The plugin does not have general configuration.
 
 En créant un équipement, il faut rentrer l'adresse bluetooth de l'équipement.
 

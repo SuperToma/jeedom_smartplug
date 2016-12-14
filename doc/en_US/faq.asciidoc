@@ -1,5 +1,5 @@
 [panel,primary]
-.Est-ce que le plugin s'appuie sur des API tiers ?
+. Is the plugin relies on third-party API?
 --
 Le plugin utilise le bluetooth pour lancer les commandes, Awox Smartplug est cloudless.
 --
