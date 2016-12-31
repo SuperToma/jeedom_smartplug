@@ -2,7 +2,7 @@
 
 The plugin does not have general configuration.
 
-En créant un équipement, il faut rentrer l'adresse bluetooth de l'équipement.
+By creating an equipment, you have to enter the equipment bluetooth address.
 
 A partir de là on a deux commandes on/off qui permettent d'activer le relais et deux informations pour le statut et la consommation
 
