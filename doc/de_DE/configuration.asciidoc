@@ -1,4 +1,4 @@
-=== Configuration du plugin
+=== Plugin Konfiguration
 
 Il n'y a pas de page de configuration générale.
 
