@@ -2,7 +2,7 @@
 
 Plugin that allows to use Awox Smartplug .
 
-Les Smartplug sont des prises Bluetooth de la marque Awox. Nul besoin d'autre chose qu'une connexion bluetooth pour commander la prise, y compris via un déporté.
+The Smartplug are bluetooth plugs from the brand Awox. No need anything else than a bluetooth connection for actions.
 
 Vous pouvez trouver des prises Awox par exemple :
 
